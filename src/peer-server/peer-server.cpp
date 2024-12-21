@@ -444,14 +444,17 @@ int main(int argc, char *argv[]) {
 	info.pvo = &pvo;
 	info.protocols = protocols_8080;
 
-	// struct lws_vhost *host_8080 = lws_create_vhost(peerServer->context, &info);
-	// if (host_8080 == NULL) {
-	// 	LOG_ERROR("Failed to create vhost for port 8080\n");
-	// 	exit(1);
-	// }
-
 	if (email == nullptr || common_name == nullptr) {
 		LOG_WARNING("--email or --common-name not specified, not starting TLS server\n");
+
+		// fall back to http on port 8080
+		struct lws_vhost *host_8080 = lws_create_vhost(peerServer->context, &info);
+		if (host_8080 == NULL) {
+			LOG_ERROR("Failed to create vhost for port 8080\n");
+			exit(1);
+		} else {
+			LOG_INFO("Server started on port 8080\n");
+		}
 	} else {
 		info.protocols = protocols_443;
 		info.port = 443;
@@ -463,6 +466,8 @@ int main(int argc, char *argv[]) {
 		if (host_443 == NULL) {
 			LOG_ERROR("Failed to create vhost for port 443\n");
 			exit(1);
+		} else {
+			LOG_INFO("Server started on port 443\n");
 		}
 	}
 
