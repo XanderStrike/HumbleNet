@@ -1,9 +1,9 @@
 [submodule "3rdparty/libwebsockets"]
 	path = 3rdparty/libwebsockets
-	url = git@github.com:jdarpinian/libwebsockets.git
+	url = https://github.com/jdarpinian/libwebsockets.git
 [submodule "3rdparty/boringssl"]
 	path = 3rdparty/boringssl
-	url = git@github.com:google/boringssl.git
+	url = https://github.com/google/boringssl.git
 [submodule "3rdparty/flatbuffers"]
 	path = 3rdparty/flatbuffers
-	url = git@github.com:google/flatbuffers.git
+	url = https://github.com/google/flatbuffers.git
